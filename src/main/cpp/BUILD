@@ -1,7 +1,6 @@
-cc_library(
-    name = "jna",
-    visibility = ["//visibility:public"],
-
+cc_binary(
+    name = "libtensorflow.so",
+    linkshared = 1,
     srcs = [
       "jna.cc",
     ],
@@ -10,4 +9,3 @@ cc_library(
         "//tensorflow/core:tensorflow",
     ]
 )
-

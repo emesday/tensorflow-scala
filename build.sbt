@@ -27,8 +27,9 @@ compileNative := {
   }
   Process("git checkout v0.10.0", new File("tensorflow")).!
   "mkdir -p tensorflow/tensorflow/jna".!
-  "cp -r cd/main/cpp/* tensorflow/tensorflow/jna/".!
-  Process("bazel build -c opt //tensorflow:libtensorflow_cc.so", new File("tensorflow")).!
+  "cp src/main/cpp/BUILD tensorflow/tensorflow/jna/".!
+  "cp src/main/cpp/jna.cc tensorflow/tensorflow/jna/".!
+  Process("bazel build -c opt //tensorflow/jna:libtensorflow.so", new File("tensorflow")).!
   s"rm -f $lib".!
-  s"mv tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so $lib".!
+  s"mv tensorflow/bazel-bin/tensorflow/jna/libtensorflow.so $lib".!
 }
