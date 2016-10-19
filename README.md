@@ -1,4 +1,4 @@
-# Java binding of TensorFlow 
+# Scala binding of TensorFlow 
 
 ## Build
 
