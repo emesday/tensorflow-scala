@@ -11,8 +11,12 @@
 
     $ (cd model && sh download.sh)
     $ sbt "runMain tensorflow.TensorFlowExample cropped_panda.jpg"
-    
-This will show
+  
+where `cropped_panda.jpg` is:
+
+![cropped_panda](https://raw.githubusercontent.com/mskimm/tensorflow-java/master/cropped_panda.jpg)
+
+The last command will show:
 
     giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca (score = 0.89233)
     indri, indris, Indri indri, Indri brevicaudatus (score = 0.00859)
@@ -25,3 +29,12 @@ This will show
     go-kart (score = 0.00047)
     digital watch (score = 0.00046)
 
+## Scala API 
+
+    import java.nio.file.{Paths, Files}
+    val bytes = Files.readAllBytes(Paths.get("/path/to/jpg"))
+    val inputLayer = "DecodeJpeg/contents:0"
+    val outputLayer = "softmax:0"
+    val result: Array[Float] = TensorFlow.using("/path/to/model") { tf =>
+       tf.run(inputLayer, outputLayer, bytes)
+    }
