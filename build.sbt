@@ -4,7 +4,7 @@ val compileNative = taskKey[Unit]("Compile tensorflow into shared library.")
 
 name := "tensorflow-scala"
 
-version := "0.0.1"
+version := "0.0.2-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
