@@ -14,7 +14,7 @@
 For linux-x86-64 or OSX users,
 
     resolvers += Resolver.bintrayRepo("mskimm", "maven")
-    libraryDependencies += "com.github.mskimm" %% "tensorflow-java" % "0.0.1"
+    libraryDependencies += "com.github.mskimm" %% "tensorflow-scala" % "0.0.1"
 
 ## Building the native TensorFlow library
 Or,
