@@ -1,4 +1,4 @@
-# Scala/Java binding of TensorFlow 
+# A Scala binding of TensorFlow 
 
 ## Scala API 
 
