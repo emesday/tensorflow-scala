@@ -2,7 +2,7 @@ import com.sun.jna.Platform
 
 val compileNative = taskKey[Unit]("Compile tensorflow into shared library.")
 
-name := "tensorflow-java"
+name := "tensorflow-scala"
 
 version := "0.0.1"
 
