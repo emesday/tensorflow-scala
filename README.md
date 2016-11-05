@@ -1,6 +1,21 @@
 # Scala/Java binding of TensorFlow 
 
-## Build
+## Scala API 
+
+    import java.nio.file.{Paths, Files}
+    val bytes = Files.readAllBytes(Paths.get("/path/to/jpg"))
+    val inputLayer = "DecodeJpeg/contents:0"
+    val outputLayer = "softmax:0"
+    val result: Array[Float] = TensorFlow.using("/path/to/model") { tf =>
+       tf.run(inputLayer, outputLayer, bytes)
+    }
+
+## Installation
+
+    resolvers += Resolver.bintrayRepo("mskimm", "maven")
+    libraryDependencies += "com.github.mskimm" %% "tensorflow-java" % "0.0.1"
+
+## Building the native TensorFlow library
 
     $ git clone https://github.com/mskimm/tensorflow-java.git
     $ cd tensorflow-java
@@ -28,13 +43,3 @@ The last command will show:
     soccer ball (score = 0.00047)
     go-kart (score = 0.00047)
     digital watch (score = 0.00046)
-
-## Scala API 
-
-    import java.nio.file.{Paths, Files}
-    val bytes = Files.readAllBytes(Paths.get("/path/to/jpg"))
-    val inputLayer = "DecodeJpeg/contents:0"
-    val outputLayer = "softmax:0"
-    val result: Array[Float] = TensorFlow.using("/path/to/model") { tf =>
-       tf.run(inputLayer, outputLayer, bytes)
-    }
