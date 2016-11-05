@@ -19,8 +19,8 @@ For linux-x86-64 or OSX users,
 ## Building the native TensorFlow library
 Or,
 
-    $ git clone https://github.com/mskimm/tensorflow-java.git
-    $ cd tensorflow-java
+    $ git clone https://github.com/mskimm/tensorflow-scala.git
+    $ cd tensorflow-scala
     $ sbt compileNative # invoke bazel, see https://www.tensorflow.org/versions/master/get_started/os_setup.html
     $ sbt package
     
@@ -31,7 +31,7 @@ Or,
   
 where `cropped_panda.jpg` is:
 
-![cropped_panda](https://raw.githubusercontent.com/mskimm/tensorflow-java/master/cropped_panda.jpg)
+![cropped_panda](https://raw.githubusercontent.com/mskimm/tensorflow-scala/master/cropped_panda.jpg)
 
 The last command will show:
 
