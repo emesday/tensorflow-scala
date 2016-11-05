@@ -2,9 +2,9 @@ import com.sun.jna.Platform
 
 val compileNative = taskKey[Unit]("Compile tensorflow into shared library.")
 
-name := "tensorflow"
+name := "tensorflow-java"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.0.1"
 
 scalaVersion := "2.11.8"
 
@@ -13,6 +13,10 @@ crossScalaVersions := Seq("2.10.6")
 libraryDependencies ++= Seq(
   "net.java.dev.jna" % "jna" % "4.2.2"
 )
+
+organization := "com.github.mskimm"
+
+licenses += "Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html")
 
 compileNative := {
   import scala.sys.process._
@@ -33,3 +37,5 @@ compileNative := {
   s"rm -f $lib".!
   s"mv tensorflow/bazel-bin/tensorflow/jna/libtensorflow.so $lib".!
 }
+
+
