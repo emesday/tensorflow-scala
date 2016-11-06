@@ -1,5 +1,7 @@
 # A Scala binding of TensorFlow 
 
+https://www.tensorflow.org/versions/r0.11/tutorials/image_recognition/index.html
+
 ## Scala API 
 
     import java.nio.file.{Paths, Files}
