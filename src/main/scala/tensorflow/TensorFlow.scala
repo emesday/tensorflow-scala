@@ -4,7 +4,20 @@ class TensorFlow(modelPath: String, maxSize: Int) {
 
   def this(modelPath: String) = this(modelPath, 2048)
 
-  private val session = TensorFlowNative.tensorFlowNative.tfCreateSession(modelPath)
+  private var session = TensorFlowNative.tensorFlowNative.tfCreateSession(modelPath)
+
+  def reload(modelPath: String): Unit = {
+    val oldSession = session
+    session = TensorFlowNative.tensorFlowNative.tfCreateSession(modelPath)
+
+    // cleanup after 10 sec.
+    new Thread(new Runnable {
+      override def run(): Unit = {
+        Thread.sleep(10000)
+        TensorFlowNative.tensorFlowNative.tfCloseSession(oldSession)
+      }
+    }).start()
+  }
 
   def run(inputLayer: String, outputLayer: String, data: Array[Byte]): Array[Float] =
     run(inputLayer, outputLayer, data, -1)
