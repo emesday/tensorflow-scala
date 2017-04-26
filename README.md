@@ -1,3 +1,5 @@
+[![Analytics](https://ga-beacon.appspot.com/UA-98128111-1/readme)](https://github.com/igrigorik/ga-beacon)
+
 # A Scala binding of TensorFlow 
 
 https://www.tensorflow.org/versions/r0.11/tutorials/image_recognition/index.html
