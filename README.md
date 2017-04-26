@@ -1,4 +1,4 @@
-[![Analytics](https://ga-beacon.appspot.com/UA-98128111-1/readme)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-98128111-1/tensorflow-scala)](https://github.com/igrigorik/ga-beacon)
 
 # A Scala binding of TensorFlow 
 
