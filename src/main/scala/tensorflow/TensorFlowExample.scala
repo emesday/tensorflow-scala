@@ -1,6 +1,10 @@
 package tensorflow
 
+import java.awt.image.DataBufferByte
+import java.io.{BufferedInputStream, ByteArrayOutputStream}
+import java.net.URL
 import java.nio.file.{Files, Paths}
+import javax.imageio.ImageIO
 
 import tensorflow.model.InceptionV3
 
@@ -9,7 +13,23 @@ object TensorFlowExample {
   def main(args: Array[String]) {
     // image file
     val jpgFile = args.headOption.getOrElse("cropped_panda.jpg")
-    val jpgAsBytes = Files.readAllBytes(Paths.get(jpgFile))
+    val jpgAsBytes = jpgFile match {
+      case urlString if urlString.startsWith("http") =>
+        val url = new URL(urlString)
+        val in = new BufferedInputStream(url.openStream())
+        val out = new ByteArrayOutputStream()
+        val buf = new Array[Byte](1024)
+        var n = in.read(buf)
+        while (n != -1) {
+          out.write(buf, 0, n)
+          n = in.read(buf)
+        }
+        val bytes = out.toByteArray
+        out.close()
+        in.close()
+        bytes
+      case file => Files.readAllBytes(Paths.get(file))
+    }
 
     // define the model
     val model = new InceptionV3("model")
