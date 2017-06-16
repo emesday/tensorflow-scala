@@ -26,6 +26,8 @@ Label(n13044778,earthstar,0.0011742385)
 ```
 
 # History
-19 Oct 2016 - This project started with JNA binding of TensorFlow.
-11 May 2017 - Decided to deprecate this project because TensorFlow provides Java API from the version 1.0.0.
-16 May 2017 - Changed the objectives of this project to `Serving TensorFlow Models` with Scala
+ - 16 May 2017 - Changed the objectives of this project to `Serving TensorFlow Models` with Scala
+ - 11 May 2017 - Decided to deprecate this project because TensorFlow provides Java API from the version 1.0.0.
+ - 19 Oct 2016 - This project started with JNA binding of TensorFlow.
+
+ 
