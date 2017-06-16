@@ -8,7 +8,7 @@ object TensorFlowExample {
 
   def main(args: Array[String]) {
     // image file
-    val jpgFile = "cropped_panda.jpg"
+    val jpgFile = args.headOption.getOrElse("cropped_panda.jpg")
     val jpgAsBytes = Files.readAllBytes(Paths.get(jpgFile))
 
     // define the model
