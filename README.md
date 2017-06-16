@@ -9,6 +9,8 @@ $ (cd model; sh download.sh) # download inception-v3
 $ sbt "run-main tensorflow.TensorFlowExample cropped_panda.jpg"
 or
 $ sbt "run-main tensorflow.TensorFlowExample /path/to/jpg/image"
+or
+$ sbt "run-main tensorflow.TensorFlowExample http://path/to/online/image"
 ```
 
 where `cropped_panda.jpg` is:
