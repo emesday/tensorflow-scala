@@ -4,7 +4,7 @@ import java.nio.file.{Files, Paths}
 
 import scala.collection.JavaConverters._
 
-class ImageNet(graphPath: String, humanLabelPath: String, labelMapPath: String) extends TensorFlowModel with Labelable {
+class InceptionV3(graphPath: String, humanLabelPath: String, labelMapPath: String) extends TensorFlowModel with Labelable {
 
   def this(modelPath: String) = this(
     s"$modelPath/classify_image_graph_def.pb",

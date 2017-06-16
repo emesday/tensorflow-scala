@@ -2,7 +2,7 @@ package tensorflow
 
 import java.nio.file.{Files, Paths}
 
-import tensorflow.model.ImageNet
+import tensorflow.model.InceptionV3
 
 object TensorFlowExample {
 
@@ -12,7 +12,7 @@ object TensorFlowExample {
     val jpgAsBytes = Files.readAllBytes(Paths.get(jpgFile))
 
     // define the model
-    val model = new ImageNet("model")
+    val model = new InceptionV3("model")
 
     // initialize TensorFlowProvider
     val provider = new TensorFlowProvider(model)
