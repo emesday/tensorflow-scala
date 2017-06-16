@@ -2,6 +2,7 @@ package tensorflow
 
 import org.tensorflow.{Graph, Session, Tensor}
 import tensorflow.model.TensorFlowModel
+
 import scala.collection.JavaConverters._
 
 class TensorFlowProvider(model: TensorFlowModel) extends AutoCloseable {

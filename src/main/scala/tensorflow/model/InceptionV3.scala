@@ -1,5 +1,6 @@
 package tensorflow.model
 
+import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
 import scala.collection.JavaConverters._
@@ -12,12 +13,12 @@ class InceptionV3(graphPath: String, humanLabelPath: String, labelMapPath: Strin
     s"$modelPath/imagenet_2012_challenge_label_map_proto.pbtxt")
 
   private val codeLabelSeq: Array[(String, String)] = {
-    val labelMap = Files.readAllLines(Paths.get(humanLabelPath)).asScala
+    val labelMap = Files.readAllLines(Paths.get(humanLabelPath), Charset.defaultCharset()).asScala
       .map(_.split("\\s+", 2))
       .map { case Array(s, l) => (s.trim, l.trim) }
       .toMap
 
-    val indexToCode = Files.readAllLines(Paths.get(labelMapPath)).asScala
+    val indexToCode = Files.readAllLines(Paths.get(labelMapPath), Charset.defaultCharset()).asScala
       .dropWhile(_.trim.startsWith("#"))
       .grouped(4)
       .map { grouped =>

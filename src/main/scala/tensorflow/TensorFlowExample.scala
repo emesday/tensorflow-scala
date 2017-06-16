@@ -1,10 +1,8 @@
 package tensorflow
 
-import java.awt.image.DataBufferByte
 import java.io.{BufferedInputStream, ByteArrayOutputStream}
 import java.net.URL
 import java.nio.file.{Files, Paths}
-import javax.imageio.ImageIO
 
 import tensorflow.model.InceptionV3
 
