@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mskimm/tensorflow-scala.svg?branch=master)](https://travis-ci.org/mskimm/tensorflow-scala)
 [![Analytics](https://ga-beacon.appspot.com/UA-98128111-1/tensorflow-scala)](https://github.com/igrigorik/ga-beacon)
 
 # A Scala binding of TensorFlow for Serving TensorFlow Models
