@@ -1,51 +1,45 @@
 package tensorflow
 
-import java.io.File
-import java.nio.file.{Paths, Files}
-import scala.collection.JavaConversions._
+import java.nio.file.{Files, Paths}
+
+import tensorflow.model.ImageNet
 
 object TensorFlowExample {
 
   def main(args: Array[String]) {
+    // image file
+    val jpgFile = "cropped_panda.jpg"
+    val jpgAsBytes = Files.readAllBytes(Paths.get(jpgFile))
 
-    val jpgFile = args(0)
+    // define the model
+    val model = new ImageNet("model")
 
-    if (! new File("model/imagenet_synset_to_human_label_map.txt").exists() ||
-      ! new File("model/imagenet_2012_challenge_label_map_proto.pbtxt").exists() ||
-      ! new File("model/classify_image_graph_def.pb").exists()) {
-      println("run (cd model && sh download.sh)")
-      return
-    }
+    // initialize TensorFlowProvider
+    val provider = new TensorFlowProvider(model)
 
-    val labelMap = Files.readAllLines(Paths.get("model/imagenet_synset_to_human_label_map.txt"))
-      .map(_.split("\\s+", 2))
-      .map { case Array(s, l) => (s.trim, l.trim) }
-      .toMap
+    // setting up input and output layers to classify
+    val inputLayer = "DecodeJpeg/contents"
+    val outputLayer = "softmax"
 
-    val indexToString = Files.readAllLines(Paths.get("model/imagenet_2012_challenge_label_map_proto.pbtxt"))
-      .dropWhile(_.trim.startsWith("#"))
-      .grouped(4)
-      .map { grouped =>
-        val targetClass = grouped(1).split(":")(1).trim.toInt
-        val targetClassString = grouped(2).split(":")(1).trim.stripPrefix("\"").stripSuffix("\"")
-        (targetClass, labelMap(targetClassString))
-      }
-      .toMap
+    // get result of the outputLayer
+    val result = provider.run(inputLayer -> jpgAsBytes, outputLayer)
 
-    TensorFlow.using("model/classify_image_graph_def.pb") { tf =>
-      val bytes = Files.readAllBytes(Paths.get(jpgFile))
-      val inputLayer = "DecodeJpeg/contents:0"
-      val outputLayer = "softmax:0"
-      tf.run(inputLayer, outputLayer, bytes)
-        .zipWithIndex
-        .sortBy(-_._1)
-        .take(10)
-        .foreach { case (score, i) =>
-          val humanString = indexToString.getOrElse(i, s"$i")
-          println(f"$humanString (score = $score%.5f)")
-        }
-    }
+    // get label of the top 5
+    val label = model.getLabelOf(result.head, 5)
 
+    // print out
+    label foreach println
+
+    // shows ...
+    //
+    // Label(n02510455,giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca,0.8910737)
+    // Label(n02500267,indri, indris, Indri indri, Indri brevicaudatus,0.007790538)
+    // Label(n02509815,lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens,0.0029591226)
+    // Label(n07760859,custard apple,0.0014657712)
+    // Label(n13044778,earthstar,0.0011742385)
+
+    // release resources
+    provider.close()
   }
 
 }
