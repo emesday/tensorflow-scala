@@ -29,6 +29,10 @@ Label(n07760859,custard apple,0.0014657712)
 Label(n13044778,earthstar,0.0011742385)
 ```
 
+## Example
+
+See https://github.com/mskimm/tensorflow-scala/blob/master/src/main/scala/tensorflow/TensorFlowExample.scala
+
 # History
  - 16 June 2017 - Changed the objectives of this project to `Serving TensorFlow Models` with Scala
  - 11 May 2017 - Decided to deprecate this project because TensorFlow provides Java API from the version 1.0.0.
