@@ -3,6 +3,7 @@
 
 # A Scala binding of TensorFlow for Serving TensorFlow Models
 
+## Quick Start
 ```
 $ git clone https://github.com/mskimm/tensorflow-scala.git
 $ cd tensorflow-scala
