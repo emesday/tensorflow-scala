@@ -7,18 +7,18 @@
 $ git clone https://github.com/mskimm/tensorflow-scala.git
 $ cd tensorflow-scala
 $ (cd model; sh download.sh) # download inception-v3
-$ sbt "run-main tensorflow.TensorFlowExample cropped_panda.jpg"
+$ sbt "core/run-main tensorflow.TensorFlowExample cropped_panda.jpg"
 or
-$ sbt "run-main tensorflow.TensorFlowExample /path/to/jpg/image"
+$ sbt "core/run-main tensorflow.TensorFlowExample /path/to/jpg/image"
 or
-$ sbt "run-main tensorflow.TensorFlowExample http://path/to/online/image"
+$ sbt "core/run-main tensorflow.TensorFlowExample http://path/to/online/image"
 ```
 
 where `cropped_panda.jpg` is:
 
 ![cropped_panda](https://raw.githubusercontent.com/mskimm/tensorflow-scala/master/cropped_panda.jpg)
 
-The `sbt "run-main tensorflow.TensorFlowExample cropped_panda.jpg"` will show:
+The `sbt "core/run-main tensorflow.TensorFlowExample cropped_panda.jpg"` will show:
 
 ```
 Label(n02510455,giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca,0.8910737)
