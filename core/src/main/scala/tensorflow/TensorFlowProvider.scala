@@ -1,11 +1,38 @@
 package tensorflow
 
+import java.io.ByteArrayOutputStream
+import java.nio.ByteBuffer
+import java.nio.file.Files
+
+import com.github.fommil.netlib.BLAS
 import org.tensorflow.{Graph, Session, Tensor}
 import tensorflow.model.TensorFlowModel
 
 import scala.collection.JavaConverters._
 
 class TensorFlowProvider(model: TensorFlowModel) extends AutoCloseable {
+
+  private val blas = BLAS.getInstance()
+
+  private val (pc, rows, cols) = {
+    val pcBytes: Array[Byte] = {
+      val input = getClass.getResourceAsStream("/pc")
+      val output = new ByteArrayOutputStream()
+      val buffer = new Array[Byte](4096)
+      var n = input.read(buffer)
+      while (-1 != n) {
+        output.write(buffer, 0, n)
+        n = input.read(buffer)
+      }
+      output.toByteArray
+    }
+    val bf = ByteBuffer.wrap(pcBytes)
+    val rows = bf.getInt()
+    val cols = bf.getInt()
+    val floats = new Array[Float](bf.remaining() / 4)
+    floats.indices foreach { i => floats(i) = bf.getFloat }
+    (floats, rows, cols)
+  }
 
   private val graph: Graph = {
     val graph = new Graph()
@@ -60,6 +87,12 @@ class TensorFlowProvider(model: TensorFlowModel) extends AutoCloseable {
     resultTensors.foreach(_.close())
 
     result
+  }
+
+  def reduce(features: Array[Float]): Array[Float] = {
+    val projected = new Array[Float](cols)
+    blas.sgemv("T", rows, cols, 1f, pc, rows, features, 1, 0, projected, 1)
+    projected
   }
 
   override def close(): Unit = {

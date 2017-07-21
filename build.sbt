@@ -8,7 +8,10 @@ lazy val commonSettings = Seq(
 lazy val core = project
   .settings(commonSettings)
   .settings(Seq(
-    libraryDependencies += "org.tensorflow" % "tensorflow" % "1.2.1"
+    libraryDependencies ++= Seq(
+      "org.tensorflow" % "tensorflow" % "1.2.1",
+      "com.github.fommil.netlib" % "all" % "1.1.2" pomOnly()
+    )
   ))
 
 lazy val rest = project
